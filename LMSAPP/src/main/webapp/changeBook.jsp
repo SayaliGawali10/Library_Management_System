@@ -85,9 +85,9 @@
                 <i class="bi bi-arrow-repeat"></i> Change Borrowed Book
             </h2>
 
-            <!-- Check if student exists and has borrowed a book -->
+            
             <c:if test="${not empty st}">
-                <!-- Check if the student has borrowed a book -->
+                
                 <c:if test="${not empty st.borrowedBook}">
                     <form action="/UpdateBook" method="post">
                         <input type="hidden" name="studentid" value="${st.id}">
@@ -132,7 +132,7 @@
                         </div>
                     </form>
 
-                    <!-- Button to remove the book -->
+                    
                     <form action="/RemoveBook" method="post" style="margin-top: 20px;">
                         <input type="hidden" name="id" value="${st.id}">
                         <div class="text-center">
@@ -143,11 +143,11 @@
                     </form>
                 </c:if>
 
-                <!-- If the student has not borrowed a book, show a message -->
+                
                 <c:if test="${empty st.borrowedBook}">
                     <p class="text-center">This student has not borrowed any books. Please borrow a book first.</p>
                     <form action="/BorrowBook" method="post">
-                        <input type="hidden" name="studentid" value="${st.id}">
+                        <input type="hidden" name="id" value="${st.id}">
                         <div class="form-group">
                             <label for="newBook" class="form-label">Select Book to Borrow</label>
                             <select class="form-control" id="newBook" name="borrowedBook" required>
@@ -173,7 +173,7 @@
                 </c:if>
             </c:if>
 
-            <!-- If student is not found -->
+            
             <c:if test="${empty st}">
                 <p class="text-center">Student not found. Please go back and try again.</p>
             </c:if>

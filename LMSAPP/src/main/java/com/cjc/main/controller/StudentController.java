@@ -82,16 +82,29 @@ public class StudentController
 
 	@RequestMapping("/RemoveBook")
 	public String removeBook(@RequestParam("id") Long id, Model m) {
-	    Student student = ssi.getStudentById(id);  // Assuming ssi.getStudentById(id) fetches the student by ID
+	    Student student = ssi.getStudentById(id);  
 	    if (student != null) {
-	        student.setBorrowedBook(null);  // Clear the borrowedBook field
-	        ssi.save(student);  // Save the updated student object
+	        student.setBorrowedBook(null);  
+	        ssi.save(student);  
 	    }
-	    List<Student> list = ssi.getAllStudents();  // Fetch the updated list of students
+	    List<Student> list = ssi.getAllStudents();  
 	    m.addAttribute("students", list);
-	    return "addstudent";  // Or the correct view name where you display the list of students
+	    return "addstudent";  
 	}
 
+	
+	@RequestMapping("/BorrowBook")
+	public String borrowBook(@RequestParam("id") long id, @RequestParam(value = "borrowedBook", required = false) String borrowedBook, Model m) {
+	        Student student = ssi.getStudentById(id);
+	        if (student != null) {
+	            student.setBorrowedBook(borrowedBook); 
+	            ssi.save(student); 
+	        }
+           List<Student> list = ssi.getAllStudents();
+	        m.addAttribute("students", list); 
+	        return "addstudent"; 
+	    
+	}
 
 
 }

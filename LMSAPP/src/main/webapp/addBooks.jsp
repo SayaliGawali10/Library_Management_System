@@ -62,7 +62,7 @@
 </head>
 <body>
     <div class="container">
-        <!-- Search Form for Book ID -->
+        
         <div class="card-custom">
             <h2 class="text-center form-title">
                 <i class="bi bi-search"></i> Search Book by ID
@@ -75,7 +75,7 @@
     </button>
 </form>
 
-            <!-- Display Search Result -->
+           
             <div class="book-list">
                 <c:if test="${not empty searchedBook}">
                     <h3 class="text-center">Search Result</h3>
@@ -99,7 +99,7 @@
             </div>
         </div>
 
-        <!-- Add Book Form -->
+        
         <div class="card-custom">
             <h2 class="text-center form-title">
                 <i class="bi bi-book"></i> Add New Book
@@ -125,7 +125,7 @@
             </form>
         </div>
 
-        <!-- Display All Books -->
+       
         <div class="card-custom">
             <h2 class="text-center form-title">
                 <i class="bi bi-book"></i> All Books
@@ -156,7 +156,7 @@
             
         </div>
 
-        <!-- Delete Book Form -->
+        
         <div class="card-custom">
             <h2 class="text-center form-title">
                 <i class="bi bi-trash"></i> Delete Book

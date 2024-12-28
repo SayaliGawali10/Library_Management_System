@@ -15,8 +15,15 @@ public interface StudentServiceI {
 
 	public void remove(Long id);
 
-	public List<Student> updateStudentBook(long id, String book);
+	public Student getSingleStudent(long id);
 
+	public List<Student> updateStudentBook(long id, String borrowedBook);
+
+	public Student getStudentById(Long id);
+
+	public void save(Student student);
+
+	
 	
 
 	

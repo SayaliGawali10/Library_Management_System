@@ -64,6 +64,34 @@ public class StudentController
 		return "addstudent";
 		
 	}
-	
+	@RequestMapping("/ChangeBook")
+	public String onBatchChange(@RequestParam long id, Model m) {
+	    Student st = ssi.getSingleStudent(id);  
+	    List<Student> list = ssi.getAllStudents();  
+        m.addAttribute("st", st);  
+	    m.addAttribute("students", list);   
+	    return "changeBook";  
+	    }
+
+	@RequestMapping("/UpdateBook")
+	public String batchShift(@RequestParam("studentid") long id, @RequestParam("borrowedBook") String borrowedBook, Model m) {
+	    List<Student> students = ssi.updateStudentBook(id, borrowedBook);  
+	    m.addAttribute("students", students);  
+	    return "addstudent";  
+	}
+
+	@RequestMapping("/RemoveBook")
+	public String removeBook(@RequestParam("id") Long id, Model m) {
+	    Student student = ssi.getStudentById(id);  // Assuming ssi.getStudentById(id) fetches the student by ID
+	    if (student != null) {
+	        student.setBorrowedBook(null);  // Clear the borrowedBook field
+	        ssi.save(student);  // Save the updated student object
+	    }
+	    List<Student> list = ssi.getAllStudents();  // Fetch the updated list of students
+	    m.addAttribute("students", list);
+	    return "addstudent";  // Or the correct view name where you display the list of students
+	}
+
+
 
 }

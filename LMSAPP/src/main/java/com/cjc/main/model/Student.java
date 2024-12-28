@@ -20,7 +20,7 @@ public class Student {
     private String address;
     private String borrowedBook; 
     private LocalDate returnDate;
-    private double lateFee;
+   
     
 	public Long getId() {
 		return id;
@@ -64,12 +64,6 @@ public class Student {
 	public void setReturnDate(LocalDate returnDate) {
 		this.returnDate = returnDate;
 	}
-	public double getLateFee() {
-		return lateFee;
-	}
-	public void setLateFee(double lateFee) {
-		this.lateFee = lateFee;
-	}
-
+	
 	
 }

@@ -14,6 +14,8 @@ public interface StudentRepository extends CrudRepository<Student, Long>{
 
 	public List<Student> findAllById(Long id);
 
+	public void save(List<Student> student);
+
 	
 	
 

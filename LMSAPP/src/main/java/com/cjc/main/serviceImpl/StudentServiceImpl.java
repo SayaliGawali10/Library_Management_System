@@ -1,6 +1,7 @@
 package com.cjc.main.serviceImpl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,9 +11,6 @@ import com.cjc.main.model.Book;
 import com.cjc.main.model.Student;
 import com.cjc.main.repository.StudentRepository;
 import com.cjc.main.serviceI.StudentServiceI;
-
-
-
 
 @Service
 public class StudentServiceImpl implements StudentServiceI
@@ -46,16 +44,36 @@ public class StudentServiceImpl implements StudentServiceI
 	}
 
 	@Override
-	public List<Student> updateStudentBook(long id, String book) {
-		
-		Student s=sr.findById(id).get();
-		
-		sr.save(s);
-		return (List<Student>) sr.findAll();
-	}
+	public Student getSingleStudent(long id) {
+		Optional<Student> opStudent=sr.findById(id);
+		return opStudent.get();
+		}
 	
+	@Override
+	public List<Student> updateStudentBook(long id, String borrowedBook) {
+	    Student s = sr.findById(id).orElse(null);  
+	    if (s != null) {
+	        s.setBorrowedBook(borrowedBook);  
+	        sr.save(s);  
+	    }
+	    return (List<Student>) sr.findAll();  
+	}
+
+	@Override
+	public Student getStudentById(Long id) {
+		Optional<Student> opStudent=sr.findById(id);
+		   return opStudent.get();  
+			}
 
 	
+	@Override
+	public void save(Student student) {
+		sr.save(student);
+	}
+
+	
+	
+
 	 
    
 

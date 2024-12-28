@@ -60,11 +60,27 @@
     }
 </style>
 </head>
-
-
 <body>
+
+<div class="container text-end mt-3">
+    <a href="javascript:void(0);" onclick="logoutUser()">
+        <button class="btn btn-outline-primary">
+            Logout
+        </button>
+    </a>
+</div>
+
+<script>
+    function logoutUser() {
+  
+        sessionStorage.clear();  
+        localStorage.clear();   
+        window.location.href = 'login.jsp';  
+    }
+</script>
+
     <div class="container">
-        <!-- Search Form for Student ID -->
+        
         <div class="card-custom">
             <h2 class="text-center form-title">
                 <i class="bi bi-search"></i> Search Student by ID
@@ -77,7 +93,7 @@
                 </button>
             </form>
 
-            <!-- Display Search Result -->
+            
             <div class="student-list">
                 <c:if test="${not empty searchedStudent}">
                     <h3 class="text-center">Search Result</h3>
@@ -105,7 +121,7 @@
             </div>
         </div>
 
-        <!-- Add Student Form -->
+       
         <div class="card-custom">
             <h2 class="text-center form-title">
                 <i class="bi bi-person-plus"></i> Add New Student
@@ -155,7 +171,7 @@
             </form>
         </div>
 
-        <!-- Display All Students -->
+       
         <div class="card-custom">
             <h2 class="text-center form-title">
                 <i class="bi bi-list"></i> All Students
@@ -164,6 +180,7 @@
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
+                            <th>Select</th>
                             <th>Student ID</th>
                             <th>Name</th>
                             <th>Email</th>
@@ -171,13 +188,15 @@
                             <th>Address</th>
                             <th>Borrowed Book</th>
                             <th>Return Date</th>
-                            <th>Late Fee</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         <c:forEach var="student" items="${students}">
                             <tr>
+                                <td>
+                                    <input type="radio" name="selectedStudentId" value="${student.id}" required>
+                                </td>
                                 <td>${student.id}</td>
                                 <td>${student.name}</td>
                                 <td>${student.email}</td>
@@ -185,33 +204,14 @@
                                 <td>${student.address}</td>
                                 <td>${student.borrowedBook}</td>
                                 <td>${student.returnDate}</td>
-                                <td>${student.lateFee}</td>
                                 <td>
-                                    <!-- Change Book Button -->
+                                   
                                     <form action="ChangeBook" method="post" class="d-inline">
                                         <input type="hidden" name="id" value="${student.id}">
-                                        <select name="newBook" class="form-select form-select-sm d-inline-block" style="width: auto;">
-                                            <option value="Java">Java</option>
-                                            <option value="Python">Python</option>
-                                            <option value="C">C</option>
-                                            <option value="C++">C++</option>
-                                            <option value=".NET">.NET</option>
-                                            <option value="OOPs">OOPs</option>
-                                     <!-- Change Book Button -->
-                            <form action="fees" method="get" class="d-inline">
-                                <input type="hidden" name="studentId" value="${student.id}">
-                                <button type="submit" class="btn btn-sm btn-primary">
-                                    <i class="bi bi-arrow-repeat"></i> Change Book
-                                </button>
-                            </form>
-
-                            <!-- Late Fee Button -->
-                            <form action="fees" method="get" class="d-inline">
-                                <input type="hidden" name="studentId" value="${student.id}">
-                                <button type="submit" class="btn btn-sm btn-warning">
-                                    <i class="bi bi-cash"></i> Update Late Fee
-                                </button>
-                            </form>
+                                        <button type="submit" class="btn btn-sm btn-primary">
+                                            <i class="bi bi-arrow-repeat"></i> Change Book
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -223,7 +223,7 @@
             </c:if>
         </div>
 
-        <!-- Delete Student Form -->
+        
         <div class="card-custom">
             <h2 class="text-center form-title">
                 <i class="bi bi-trash"></i> Delete Student
@@ -241,7 +241,5 @@
         </div>
     </div>
 </body>
-
-
 
 </html> 
